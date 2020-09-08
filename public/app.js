@@ -8,6 +8,7 @@ const Speaker = new SpeechSynthesisUtterance();
 
 function PopFilePicker() {
     FilePickerInput.click();
+    StopSpeech();
 }
 
 function FilePicked() {
