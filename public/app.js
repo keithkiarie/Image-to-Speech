@@ -1,5 +1,7 @@
 TakePhotoBtn.addEventListener("click", PopFilePicker);
-FilePickerInput.addEventListener("input", FilePicked)
+FilePickerInput.addEventListener("input", FilePicked);
+
+const Speaker = new SpeechSynthesisUtterance();
 
 function PopFilePicker() {
     FilePickerInput.click();
@@ -7,6 +9,10 @@ function PopFilePicker() {
 
 function FilePicked() {
     const Files = FilePickerInput.files;
+
+    TextDisplayDiv.innerHTML = "";
+    AudioControlsDiv.style.display = "none";
+
     if (Files.length > 0) {
         let FileURL = window.URL.createObjectURL(Files[0]);
         RecognizeText(FileURL, TextRecognized);
@@ -14,7 +20,6 @@ function FilePicked() {
 }
 
 function Speak(message) {
-    const Speaker = new SpeechSynthesisUtterance();
     Speaker.text = message;
     window.speechSynthesis.speak(Speaker);
 }
@@ -25,7 +30,7 @@ function RecognizeText(ImageURL, callback) {
         'eng', {
             logger: m => {
                 m.status = UpperCaseFirstLetters(m.status);
-                TextDisplay.innerHTML = `${m.status}: ${(m.progress * 100).toFixed(2)}%`
+                TextDisplayDiv.innerHTML = `${m.status}: ${(m.progress * 100).toFixed(2)}%`
             }
         }
     ).then(({
@@ -38,7 +43,13 @@ function RecognizeText(ImageURL, callback) {
 }
 
 function TextRecognized(text) {
-    TextDisplay.innerHTML = text;
+    TextDisplayDiv.innerHTML = text;
+    AudioControlsDiv.style.display = "block";
+
+    PlayBtn.addEventListener("click", function () {
+        PauseBtn.style.display = "block";
+        Speak(text);
+    })
 }
 
 function UpperCaseFirstLetters(Text) {

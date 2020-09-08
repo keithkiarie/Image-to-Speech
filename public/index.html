@@ -25,15 +25,41 @@
 
     <input id="FilePickerInput" type="file" accept="image/*" style="display: none;" multiple>
 
-    <div id="TextDisplay"></div>
+    <br><br>
+    <div id="AudioControlsDiv" style="display: none;">
+        <div id="PlayBtnDiv">
+            <button type="button" class="btn btn-default btn-sm" id="PlayBtn">
+                <span class="glyphicon glyphicon-play"></span> Play
+            </button>
+        </div>
+
+        <div id="PauseBtnDiv" style="display: none;">
+            <button type="button" class="btn btn-default btn-sm" id="PauseBtn">
+                <span class="glyphicon glyphicon-pause"></span> Pause
+            </button>
+        </div>
+    </div>
+
+    <div id="TextDisplayDiv"></div>
 </body>
 
 <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+
 <script>
+    // If Speech Synthesis is not supported 😣
+    if (!'speechSynthesis' in window) alert("Sorry, your browser doesn't support text to speech!");
+
+    
     const TakePhotoBtn = document.getElementById("TakePhotoBtn");
     const FilePickerInput = document.getElementById("FilePickerInput");
-    const TextDisplay = document.getElementById("TextDisplay");
+    const TextDisplayDiv = document.getElementById("TextDisplayDiv");
+    const AudioControlsDiv = document.getElementById("AudioControlsDiv");
+    const PlayBtnDiv = document.getElementById("PlayBtnDiv");
+    const PauseBtnDiv = document.getElementById("PauseBtnDiv");
+    const PlayBtn = document.getElementById("PlayBtn");
+    const PauseBtn = document.getElementById("PauseBtn");
 </script>
+
 <script src="app.js"></script>
 
 </html>
