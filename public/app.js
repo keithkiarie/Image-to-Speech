@@ -1,5 +1,8 @@
 TakePhotoBtn.addEventListener("click", PopFilePicker);
 FilePickerInput.addEventListener("input", FilePicked);
+PauseBtn.addEventListener("click", PauseSpeech);
+ResumeBtn.addEventListener("click", ResumeSpeech);
+StopBtn.addEventListener("click", StopSpeech);
 
 const Speaker = new SpeechSynthesisUtterance();
 
@@ -19,10 +22,7 @@ function FilePicked() {
     }
 }
 
-function Speak(message) {
-    Speaker.text = message;
-    window.speechSynthesis.speak(Speaker);
-}
+
 
 function RecognizeText(ImageURL, callback) {
     Tesseract.recognize(
@@ -47,7 +47,9 @@ function TextRecognized(text) {
     AudioControlsDiv.style.display = "block";
 
     PlayBtn.addEventListener("click", function () {
-        PauseBtn.style.display = "block";
+        PauseBtnDiv.style.display = "block";
+        StopBtnDiv.style.display = "block";
+        PlayBtnDiv.style.display = "none";
         Speak(text);
     })
 }
@@ -70,4 +72,29 @@ function UpperCaseFirstLetters(Text) {
         else NewText += Separated[i] + " ";
     }
     return NewText;
+}
+
+
+function Speak(message) {
+    Speaker.text = message;
+    window.speechSynthesis.speak(Speaker);
+}
+
+
+function PauseSpeech() {
+    window.speechSynthesis.pause();
+    ResumeBtnDiv.style.display = "block";
+    PauseBtnDiv.style.display = "none";
+}
+
+function ResumeSpeech() {
+    window.speechSynthesis.resume();
+    ResumeBtnDiv.style.display = "none";
+    PauseBtnDiv.style.display = "block";
+}
+
+function StopSpeech() {
+    AudioControlsDiv.style.display = "none";
+    TextDisplayDiv.innerHTML = "";
+    window.speechSynthesis.cancel();
 }

@@ -26,7 +26,10 @@
     <input id="FilePickerInput" type="file" accept="image/*" style="display: none;" multiple>
 
     <br><br>
+
+    <!-- Audio Controls -->
     <div id="AudioControlsDiv" style="display: none;">
+
         <div id="PlayBtnDiv">
             <button type="button" class="btn btn-default btn-sm" id="PlayBtn">
                 <span class="glyphicon glyphicon-play"></span> Play
@@ -38,8 +41,22 @@
                 <span class="glyphicon glyphicon-pause"></span> Pause
             </button>
         </div>
+
+        <div id="ResumeBtnDiv" style="display: none;">
+            <button type="button" class="btn btn-default btn-sm" id="ResumeBtn">
+                <span class="glyphicon glyphicon-play"></span> Resume
+            </button>
+        </div>
+
+        <div id="StopBtnDiv" style="display: none;">
+            <button type="button" class="btn btn-default btn-sm" id="StopBtn">
+                <span class="glyphicon glyphicon-stop"></span> Stop
+              </button>
+        </div>
     </div>
 
+
+    <!-- Text Display -->
     <div id="TextDisplayDiv"></div>
 </body>
 
@@ -49,15 +66,19 @@
     // If Speech Synthesis is not supported 😣
     if (!'speechSynthesis' in window) alert("Sorry, your browser doesn't support text to speech!");
 
-    
+
     const TakePhotoBtn = document.getElementById("TakePhotoBtn");
     const FilePickerInput = document.getElementById("FilePickerInput");
     const TextDisplayDiv = document.getElementById("TextDisplayDiv");
     const AudioControlsDiv = document.getElementById("AudioControlsDiv");
     const PlayBtnDiv = document.getElementById("PlayBtnDiv");
     const PauseBtnDiv = document.getElementById("PauseBtnDiv");
+    const ResumeBtnDiv = document.getElementById("ResumeBtnDiv");
+    const StopBtnDiv = document.getElementById("StopBtnDiv");
     const PlayBtn = document.getElementById("PlayBtn");
     const PauseBtn = document.getElementById("PauseBtn");
+    const ResumeBtn = document.getElementById("ResumeBtn");
+    const StopBtn = document.getElementById("StopBtn");
 </script>
 
 <script src="app.js"></script>
