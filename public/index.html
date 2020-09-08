@@ -23,17 +23,17 @@
         <span class="glyphicon glyphicon-camera"></span> Take Photo
     </a>
 
-    <input id="FilePickerInput" type="file" accept="image/*" style="display: none;">
+    <input id="FilePickerInput" type="file" accept="image/*" style="display: none;" multiple>
+
+    <div id="TextDisplay"></div>
 </body>
 
+<script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
 <script>
     const TakePhotoBtn = document.getElementById("TakePhotoBtn");
     const FilePickerInput = document.getElementById("FilePickerInput");
-
-    TakePhotoBtn.addEventListener("click", PopFilePicker);
-
-    function PopFilePicker() {
-        FilePickerInput.click();
-    }
+    const TextDisplay = document.getElementById("TextDisplay");
 </script>
+<script src="app.js"></script>
+
 </html>
