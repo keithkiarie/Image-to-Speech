@@ -45,39 +45,25 @@ function RecognizeText(ImageURL, callback) {
 
 function TextRecognized(text) {
     TextDisplayDiv.innerHTML = text;
+    Speaker.text = text;
     AudioControlsDiv.style.display = "block";
+    
+    PlayBtnDiv.style.display = "block";
+    PauseBtnDiv.style.display = "none";
+    ResumeBtnDiv.style.display = "none";
 
     PlayBtn.addEventListener("click", function () {
         PauseBtnDiv.style.display = "block";
         StopBtnDiv.style.display = "block";
         PlayBtnDiv.style.display = "none";
-        Speak(text);
+        Speak();
     })
 }
 
-function UpperCaseFirstLetters(Text) {
-    let Separated = Text.split(" ");
-    let NewText = "";
-
-    for (let i = 0; i < Separated.length; i++) {
-        let word = Separated[i];
-        let FirstChar = word[0].toUpperCase();
-        let NewWord = FirstChar;
-
-        for (let j = 1; j < word.length; j++) NewWord += word[j];
-        Separated[i] = NewWord;
-    }
-
-    for (let i = 0; i < Separated.length; i++) {
-        if (i == Separated.length - 1) NewText += Separated[i];
-        else NewText += Separated[i] + " ";
-    }
-    return NewText;
-}
 
 
-function Speak(message) {
-    Speaker.text = message;
+
+function Speak() {
     window.speechSynthesis.speak(Speaker);
 }
 
@@ -98,4 +84,27 @@ function StopSpeech() {
     AudioControlsDiv.style.display = "none";
     TextDisplayDiv.innerHTML = "";
     window.speechSynthesis.cancel();
+}
+
+
+
+
+function UpperCaseFirstLetters(Text) {
+    let Separated = Text.split(" ");
+    let NewText = "";
+
+    for (let i = 0; i < Separated.length; i++) {
+        let word = Separated[i];
+        let FirstChar = word[0].toUpperCase();
+        let NewWord = FirstChar;
+
+        for (let j = 1; j < word.length; j++) NewWord += word[j];
+        Separated[i] = NewWord;
+    }
+
+    for (let i = 0; i < Separated.length; i++) {
+        if (i == Separated.length - 1) NewText += Separated[i];
+        else NewText += Separated[i] + " ";
+    }
+    return NewText;
 }
